@@ -15,9 +15,7 @@ public class EbayItemService {
     private URL httpsGETRequest;
 
     public EbayItemService() {
-        this.ebayFindingAPI = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME" +
-                "=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a" +
-                "&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
+        this.ebayFindingAPI = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
     }
 
     public List<EbayItem> findAllItemsKeyword(String keyword) {
@@ -26,7 +24,7 @@ public class EbayItemService {
             return response;
         }
         try {
-            this.httpsGETRequest = new URL(this.ebayFindingAPI + keyword);
+            this.httpsGETRequest = new URL(this.ebayFindingAPI + keyword.replace(" ", "%20"));
 
             parseEbayJSON(response, this.httpsGETRequest);
         } catch (MalformedURLException m) {
