@@ -26,7 +26,7 @@ public class EbayItemService {
             return response;
         }
         try {
-            this.httpsGETRequest = new URL(this.ebayFindingAPI + keyword.replace(" ", "%20"));
+            this.httpsGETRequest = new URL(this.ebayFindingAPI + keyword);
 
             parseEbayJSON(response, this.httpsGETRequest);
         } catch (MalformedURLException m) {
