@@ -15,8 +15,8 @@ public class EbayItemService {
     private URL httpsGETRequest;
 
     public EbayItemService() {
-        this.ebayFindingAPI = "\"https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=" +
-                "findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a" +
+        this.ebayFindingAPI = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME" +
+                "=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a" +
                 "&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
     }
 
