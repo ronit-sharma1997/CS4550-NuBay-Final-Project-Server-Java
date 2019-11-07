@@ -46,7 +46,7 @@ public class EbayItemService {
             response.add(new EbayItem(item.path("itemId").get(0).asText(), item.path("title").get(0).asText(),
                     item.path("primaryCategory").get(0).path("categoryName").get(0).asText(), item.path("viewItemURL").get(0).asText(), item.path("galleryURL").get(0).asText(),
                     item.path("location").get(0).asText(),
-                    item.path("sellingStatus").get(0).path("currentPrice").get(0).path("@currencyId").asText() + " " + item.path("sellingStatus").get(0).path("currentPrice").get(0).path("__value__").asText()));
+                    item.path("sellingStatus").get(0).path("currentPrice").get(0).path("@currencyId").asText() + " " + item.path("sellingStatus").get(0).path("currentPrice").get(0).path("__value__").asText(), item.path("sellerInfo").get(0).path("sellerUserName").get(0).asText(), item.path("sellerInfo").get(0).path("positiveFeedbackPercent").get(0).asText()));
         }
     }
 

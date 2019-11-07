@@ -8,12 +8,14 @@ public class EbayItem {
     private String galleryURL;
     private String location;
     private String price;
+    private String seller;
+    private String sellerRating;
 
     public EbayItem() {
 
     }
 
-    public EbayItem(String itemId, String title, String categoryName, String viewItemURL, String galleryURL, String location, String price) {
+    public EbayItem(String itemId, String title, String categoryName, String viewItemURL, String galleryURL, String location, String price, String seller, String sellerRating) {
         this.itemId = itemId;
         this.title = title;
         this.categoryName = categoryName;
@@ -21,6 +23,8 @@ public class EbayItem {
         this.galleryURL = galleryURL;
         this.location = location;
         this.price = price;
+        this.seller = seller;
+        this.sellerRating = sellerRating;
     }
 
     public String getItemId() {
@@ -77,5 +81,21 @@ public class EbayItem {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
+    public String getSellerRating() {
+        return sellerRating;
+    }
+
+    public void setSellerRating(String sellerRating) {
+        this.sellerRating = sellerRating;
     }
 }
