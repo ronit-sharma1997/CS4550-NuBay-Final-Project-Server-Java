@@ -7,20 +7,26 @@ public class EbayItem {
     private String viewItemURL;
     private String galleryURL;
     private String location;
-    private String __value__;
+    private String price;
+    private Condition condition;
+    private String seller;
+    private String sellerRating;
 
     public EbayItem() {
 
     }
 
-    public EbayItem(String itemId, String title, String categoryName, String viewItemURL, String galleryURL, String location, String __value__) {
+    public EbayItem(String itemId, String title, String categoryName, String viewItemURL, String galleryURL, String location, String price, Condition condition, String seller, String sellerRating) {
         this.itemId = itemId;
         this.title = title;
         this.categoryName = categoryName;
         this.viewItemURL = viewItemURL;
         this.galleryURL = galleryURL;
         this.location = location;
-        this.__value__ = __value__;
+        this.price = price;
+        this.condition = condition;
+        this.seller = seller;
+        this.sellerRating = sellerRating;
     }
 
     public String getItemId() {
@@ -71,11 +77,35 @@ public class EbayItem {
         this.location = location;
     }
 
-    public String get__value__() {
-        return __value__;
+    public String getPrice() {
+        return price;
     }
 
-    public void set__value__(String __value__) {
-        this.__value__ = __value__;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public Condition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Condition condition) {
+        this.condition = condition;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
+    public String getSellerRating() {
+        return sellerRating;
+    }
+
+    public void setSellerRating(String sellerRating) {
+        this.sellerRating = sellerRating;
     }
 }
