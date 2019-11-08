@@ -10,13 +10,13 @@ public class EbayItem {
     private String price;
     private String seller;
     private String sellerRating;
-    private String conditionType;
+    private Condition conditionType;
 
     public EbayItem() {
 
     }
 
-    public EbayItem(String itemId, String title, String categoryName, String viewItemURL, String galleryURL, String location, String price, String seller, String sellerRating, String conditionType) {
+    public EbayItem(String itemId, String title, String categoryName, String viewItemURL, String galleryURL, String location, String price, String seller, String sellerRating, Condition conditionType) {
         this.itemId = itemId;
         this.title = title;
         this.categoryName = categoryName;
@@ -101,11 +101,11 @@ public class EbayItem {
         this.sellerRating = sellerRating;
     }
 
-    public String getConditionType() {
+    public Condition getConditionType() {
         return conditionType;
     }
 
-    public void setConditionType(String conditionType) {
+    public void setConditionType(Condition conditionType) {
         this.conditionType = conditionType;
     }
 }
