@@ -43,9 +43,15 @@ public class EbayItemService {
         JsonNode jsonTree = mapper.readTree(httpsGETRequest);
         JsonNode itemTree = jsonTree.path("findItemsByKeywordsResponse").get(0).path("searchResult").get(0).path("item");
         for(JsonNode item : itemTree) {
-            String condition = item.path("condition").get(0).path("conditionDisplayName").get(0).asText();
             Condition conditionType;
-            if(condition == null) {
+            String condition = "";
+            try {
+                condition = item.path("condition").get(0).path("conditionDisplayName").get(0).asText();
+            } catch (NullPointerException e) {
+                conditionType = Condition.NA;
+            }
+
+            if(condition.equals("")) {
                 conditionType = Condition.NA;
             }
             else if(condition.contains("new") || condition.contains("NEW")) {
