@@ -44,11 +44,11 @@ public class EbayItemService {
         JsonNode itemTree = jsonTree.path("findItemsByKeywordsResponse").get(0).path("searchResult").get(0).path("item");
         for(JsonNode item : itemTree) {
             String condition = item.path("condition").get(0).path("conditionDisplayName").get(0).asText();
-            Condition conditionType;
+            String conditionType;
             if(condition.contains("new") || condition.contains("NEW")) {
-                conditionType = Condition.NEW;
+                conditionType ="NEW";
             } else {
-                conditionType = Condition.USED;
+                conditionType = "USED";
             }
             response.add(new EbayItem(item.path("itemId").get(0).asText(), item.path("title").get(0).asText(),
                     item.path("primaryCategory").get(0).path("categoryName").get(0).asText(), item.path("viewItemURL").get(0).asText(), item.path("galleryURL").get(0).asText(),
