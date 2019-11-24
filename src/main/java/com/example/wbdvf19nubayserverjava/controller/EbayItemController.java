@@ -1,5 +1,6 @@
 package com.example.wbdvf19nubayserverjava.controller;
 
+import com.example.wbdvf19nubayserverjava.model.DetailedEbayItem;
 import com.example.wbdvf19nubayserverjava.model.EbayItem;
 import com.example.wbdvf19nubayserverjava.service.EbayItemService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class EbayItemController {
     private EbayItemService itemService;
 
@@ -21,5 +22,10 @@ public class EbayItemController {
     @GetMapping("/api/ebayItems/{keyword}")
     public List<EbayItem> findAllItemsKeyword(@PathVariable("keyword") String keyword) {
         return this.itemService.findAllItemsKeyword(keyword);
+    }
+    @CrossOrigin(origins = "*")
+    @GetMapping("/api/ebayItem/{itemid}")
+    public DetailedEbayItem findItemByEbayId(@PathVariable("itemid") String id) {
+        return itemService.getEbayItemById(id);
     }
 }

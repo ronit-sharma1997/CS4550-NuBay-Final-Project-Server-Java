@@ -13,7 +13,8 @@ public class EbayItem {
 
     }
 
-    public EbayItem(String itemId, String title, String categoryName, String viewItemURL, String galleryURL, String location, String __value__) {
+    public EbayItem(String itemId, String title, String categoryName, String viewItemURL,
+                    String galleryURL, String location, String __value__) {
         this.itemId = itemId;
         this.title = title;
         this.categoryName = categoryName;
