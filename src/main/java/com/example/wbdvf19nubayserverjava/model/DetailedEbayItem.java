@@ -14,6 +14,7 @@ public class DetailedEbayItem {
   private String shippingCost;
   private String sellerId;
   private String sellerRating;
+  private String conditionString;
 
 public DetailedEbayItem() {
 
@@ -22,7 +23,7 @@ public DetailedEbayItem() {
 public DetailedEbayItem(String itemId, String title, String categoryName, String categoryId, List<String>
         imageUrl,
                  String value, String quanity,String shippingCost, String ebayUrl,
-                        String sellerId, String sellerRating) {
+                        String sellerId, String sellerRating, String condition) {
       this.itemId = itemId;
       this.title = title;
       this.categoryName = categoryName;
@@ -34,7 +35,17 @@ public DetailedEbayItem(String itemId, String title, String categoryName, String
       this.shippingCost = shippingCost;
       this.sellerId = sellerId;
       this.sellerRating = sellerRating;
+      this.conditionString = condition;
 }
+
+
+  public String getConditionString() {
+    return conditionString;
+  }
+
+  public void setConditionString(String conditionString) {
+    this.conditionString = conditionString;
+  }
 
   public String getSellerRating() {
     return sellerRating;

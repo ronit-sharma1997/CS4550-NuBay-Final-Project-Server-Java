@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,4 +29,11 @@ public class EbayItemController {
     public DetailedEbayItem findItemByEbayId(@PathVariable("itemid") String id) {
         return itemService.getEbayItemById(id);
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/api/ebayCategories/{categoryId}")
+    public List<EbayItem> findItemsById(@PathVariable("categoryId") String catId) {
+        return itemService.findAllItemsByCategoryId(catId);
+    }
+
 }

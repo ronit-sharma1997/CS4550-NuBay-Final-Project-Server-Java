@@ -17,6 +17,7 @@ public class EbayItemService {
     private String ebayFindingAPI;
     private URL httpsGETRequest;
     private String shoppingApi;
+    private String categoryApi;
 
     public EbayItemService() {
         this.ebayFindingAPI = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=" +
@@ -25,6 +26,8 @@ public class EbayItemService {
         this.shoppingApi = "http://open.api.ebay.com/shopping?callname=GetSingleItem&" +
                 "responseencoding=JSON&version=967&IncludeSelector=details&appid=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a&" +
                 "itemID=";
+        this.categoryApi = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByCategory&SERVICE-VERSION=1.0.0&" +
+                "SECURITY-APPNAME=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&categoryId=";
     }
 
     public List<EbayItem> findAllItemsKeyword(String keyword) {
@@ -43,7 +46,23 @@ public class EbayItemService {
         }
 
         return response;
+    }
 
+    public List<EbayItem> findAllItemsByCategoryId(String categoryId) {
+      List<EbayItem> response = new ArrayList<>();
+      if(categoryId == null || categoryId.equals("")) {
+        return response;
+      }
+      try {
+        this.httpsGETRequest = new URL(this.categoryApi + categoryId.replace(" ", "%20"));
+
+        parseEbayJSON(response, this.httpsGETRequest);
+      } catch (MalformedURLException m) {
+        return response;
+      } catch (IOException e) {
+        return response;
+      }
+      return response;
     }
 
     public DetailedEbayItem getEbayItemById(String id) {
@@ -65,7 +84,7 @@ public class EbayItemService {
     private void parseEbayJSON(List<EbayItem> response, URL httpsGETRequest) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonTree = mapper.readTree(httpsGETRequest);
-        JsonNode itemTree = jsonTree.path("findItemsByKeywordsResponse").get(0).path("searchResult").get(0).path("item");
+        JsonNode itemTree = jsonTree.path("findItemsByCategoryResponse").get(0).path("searchResult").get(0).path("item");
         for(JsonNode item : itemTree) {
             response.add(new EbayItem(item.path("itemId").get(0).asText(), item.path("title").get(0).asText(),
                     item.path("primaryCategory").get(0).path("categoryName").get(0).asText(), item.path("viewItemURL").get(0).asText(), item.path("galleryURL").get(0).asText(),
@@ -90,7 +109,8 @@ public class EbayItemService {
                 this.findPathNonArray(itemTree, "Quantity"), this.findShippingInfo(itemTree),
                 this.findPathNonArray(itemTree,"ViewItemURLForNaturalSearch"),
                 itemTree.path("Seller").path("UserID").asText(),
-                itemTree.path("Seller").path("PositiveFeedbackPercent").asText());
+                itemTree.path("Seller").path("PositiveFeedbackPercent").asText(),
+               this.findPathNonArray(itemTree,"ConditionDisplayName"));
     }
 
     public List<String> getImageList(JsonNode itemTree) {
