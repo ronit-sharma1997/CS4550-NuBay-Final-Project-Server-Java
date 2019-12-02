@@ -15,15 +15,19 @@ public class DetailedEbayItem {
   private String sellerId;
   private String sellerRating;
   private String conditionString;
+  private String description;
+  private String refundPolicy;
+  private List<String> paymentOptions;
+  private String location;
 
 public DetailedEbayItem() {
 
 }
 
 public DetailedEbayItem(String itemId, String title, String categoryName, String categoryId, List<String>
-        imageUrl,
-                 String value, String quanity,String shippingCost, String ebayUrl,
-                        String sellerId, String sellerRating, String condition) {
+        imageUrl,String value, String quanity, String shippingCost, String ebayUrl,
+                        String sellerId, String sellerRating, String condition, String description,
+                        String refundPolicy, List<String> paymentOptions, String location) {
       this.itemId = itemId;
       this.title = title;
       this.categoryName = categoryName;
@@ -36,8 +40,44 @@ public DetailedEbayItem(String itemId, String title, String categoryName, String
       this.sellerId = sellerId;
       this.sellerRating = sellerRating;
       this.conditionString = condition;
+      this.description = description;
+      this.refundPolicy = refundPolicy;
+      this.paymentOptions = paymentOptions;
+      this.location = location;
 }
 
+
+  public List<String> getPaymentOptions() {
+    return paymentOptions;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
+  }
+
+  public void setPaymentOptions(List<String> paymentOptions) {
+    this.paymentOptions = paymentOptions;
+  }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public String getRefundPolicy() {
+    return refundPolicy;
+  }
+
+  public void setRefundPolicy(String refundPolicy) {
+    this.refundPolicy = refundPolicy;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
   public String getConditionString() {
     return conditionString;

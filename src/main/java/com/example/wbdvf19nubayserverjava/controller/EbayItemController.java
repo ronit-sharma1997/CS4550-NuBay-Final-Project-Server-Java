@@ -32,8 +32,9 @@ public class EbayItemController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/api/ebayCategories/{categoryId}")
-    public List<EbayItem> findItemsById(@PathVariable("categoryId") String catId) {
-        return itemService.findAllItemsByCategoryId(catId);
+    public List<DetailedEbayItem> findItemsById(@PathVariable("categoryId") String catId) {
+      //return new ArrayList<>();
+       return itemService.findAllItemsByCategoryId(catId);
     }
 
 }

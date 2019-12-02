@@ -8,13 +8,17 @@ public class EbayItem {
     private String galleryURL;
     private String location;
     private String __value__;
+    private String shippingCost;
+    private String condition;
+    private String sellerName;
 
     public EbayItem() {
 
     }
 
     public EbayItem(String itemId, String title, String categoryName, String viewItemURL,
-                    String galleryURL, String location, String __value__) {
+                    String galleryURL, String location, String __value__, String shippingCost,
+                    String condition, String sellerName) {
         this.itemId = itemId;
         this.title = title;
         this.categoryName = categoryName;
@@ -22,9 +26,38 @@ public class EbayItem {
         this.galleryURL = galleryURL;
         this.location = location;
         this.__value__ = __value__;
+        this.shippingCost = shippingCost;
+        this.condition = condition;
+        this.sellerName = sellerName;
     }
 
-    public String getItemId() {
+
+  public String getSellerName() {
+    return sellerName;
+  }
+
+  public void setSellerName(String sellerName) {
+    this.sellerName = sellerName;
+  }
+
+  public String getCondition() {
+    return condition;
+  }
+
+  public void setCondition(String condition) {
+    this.condition = condition;
+  }
+
+  public String getShippingCost() {
+    return shippingCost;
+  }
+
+  public void setShippingCost(String shippingCost) {
+    this.shippingCost = shippingCost;
+  }
+
+
+  public String getItemId() {
         return itemId;
     }
 
