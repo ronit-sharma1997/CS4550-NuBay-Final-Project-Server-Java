@@ -9,12 +9,6 @@ import java.util.List;
 
 public interface UserRepository extends CrudRepository <User, Integer> {
 
-//    @Query(
-//            value = "SELECT COUNT (*) from users u where u.username = :username",
-//            nativeQuery = true
-//    )
-//    public Integer findUserByUsername (@Param("username") String username);
-
     @Query("SELECT user FROM User user WHERE user.username=:username")
     public List<User> findUserByUsername
             (@Param("username") String username);

@@ -68,7 +68,7 @@ public class UserController {
         }
         return loginUserId;
     }
-    
+
     @PutMapping("/api/users/{userId}")
     public User updateUser
             (@PathVariable ("userId") Integer userId,
