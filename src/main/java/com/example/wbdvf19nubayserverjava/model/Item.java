@@ -52,6 +52,19 @@ public class Item {
         this.user = user;
     }
 
+    public void set (Item updatedItem) {
+        this.title = updatedItem.getTitle();
+        this.categoryName = updatedItem.getCategoryName();
+        this.value = updatedItem.getValue();
+        this.quantity = updatedItem.getQuantity();
+        this.conditionString = updatedItem.getConditionString();
+        this.description = updatedItem.getDescription();
+        this.refundPolicy = updatedItem.getRefundPolicy();
+        this.paymentOptions = updatedItem.getPaymentOptions();
+        this.location = updatedItem.getLocation();
+        this.base64Image = updatedItem.getBase64Image();
+    }
+
     public User getUser() {
         return user;
     }

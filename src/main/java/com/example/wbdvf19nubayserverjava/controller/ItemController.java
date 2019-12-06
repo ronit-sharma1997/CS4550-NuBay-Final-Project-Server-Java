@@ -2,6 +2,7 @@ package com.example.wbdvf19nubayserverjava.controller;
 
 import com.example.wbdvf19nubayserverjava.model.Item;
 import com.example.wbdvf19nubayserverjava.repositories.ItemRepository;
+import com.example.wbdvf19nubayserverjava.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,9 @@ import java.util.List;
 public class ItemController {
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping ("/api/items/{itemId}/image")
     public String findImageByItemId (@PathVariable("itemId") int itemId) {
@@ -29,8 +33,11 @@ public class ItemController {
         return itemRepository.findById(itemId).get();
     }
 
-    @PostMapping ("/api/items")
-    public Item createItem(@RequestBody Item item) {
+    @PostMapping ("/api/users/{userId}/items")
+    public Item createItem
+            (@PathVariable("userId") int userId,
+             @RequestBody Item item) {
+        item.setUser(userRepository.findById(userId).get());
         return itemRepository.save(item);
     }
 
@@ -40,4 +47,17 @@ public class ItemController {
         return itemRepository.findItemsByKeyword(keyword);
     }
 
+    @DeleteMapping ("/api/items/{itemId}")
+    public void deleteItemById (@PathVariable("itemId") int itemId) {
+        itemRepository.deleteById(itemId);
+    }
+
+    @PutMapping("/api/items/{itemId}")
+    public Item updateItem
+            (@PathVariable ("itemId") Integer itemId,
+             @RequestBody Item updatedItem) {
+        Item item = itemRepository.findById(itemId).get();
+        item.set(updatedItem);
+        return itemRepository.save(item);
+    }
 }
