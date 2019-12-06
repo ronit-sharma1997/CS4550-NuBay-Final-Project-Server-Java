@@ -89,6 +89,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    // Return 0 if success
     @PostMapping ("/api/users/{userId}/bookmarks/{itemId}")
     public Integer bookmarkItem(@PathVariable ("userId") Integer userId,
                             @PathVariable ("itemId") Integer itemId) {
@@ -96,7 +97,7 @@ public class UserController {
         Item item = itemRepository.findById(itemId).get();
         user.addToBookmarks(item);
         userRepository.save(user);
-        return 1;
+        return 0;
     }
 
     @GetMapping ("/api/users/{userId}/bookmarks")
@@ -107,5 +108,17 @@ public class UserController {
             bookmarkedItemList.add(itemRepository.findById(i).get());
         }
         return bookmarkedItemList;
+    }
+
+    // Return 0 if success
+    @DeleteMapping ("/api/users/{userId}/bookmarks/{itemId}")
+    public Integer deleteBookmarkedItem(@PathVariable ("userId") Integer userId,
+                                @PathVariable ("itemId") Integer itemId) {
+        User user = userRepository.findById(userId).get();
+        Item item = itemRepository.findById(itemId).get();
+
+        user.removeFromBookmarks(item);
+        userRepository.save(user);
+        return 0;
     }
 }

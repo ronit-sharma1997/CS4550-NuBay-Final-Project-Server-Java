@@ -69,6 +69,16 @@ public class Item {
         this.base64Image = updatedItem.getBase64Image();
     }
 
+    // override equals method
+    public boolean equals(Object obj){
+        if (obj instanceof Item) {
+            Item itemToTest = (Item) obj;
+            return (itemToTest.getItemId() == this.getItemId());
+        } else {
+            return false;
+        }
+    }
+
     public User getUser() {
         return user;
     }

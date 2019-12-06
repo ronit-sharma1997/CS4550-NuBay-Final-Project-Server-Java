@@ -54,7 +54,7 @@ public class User {
     }
 
     public void removeFromBookmarks(Item item) {
-
+        this.bookmarkedItems.remove(item);
     }
 
     public List<ServiceItem> getServiceItems() {
