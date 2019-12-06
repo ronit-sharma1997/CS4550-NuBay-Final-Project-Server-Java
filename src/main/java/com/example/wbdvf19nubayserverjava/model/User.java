@@ -1,6 +1,7 @@
 package com.example.wbdvf19nubayserverjava.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name="users")
@@ -15,6 +16,9 @@ public class User {
 
     private typeOfUser userRole;
 
+    @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Item> items;
+
     public enum typeOfUser {
         BUYER,
         SELLER
@@ -23,7 +27,7 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, typeOfUser userRole) {
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, typeOfUser userRole, List<Item> items) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -31,6 +35,15 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.userRole = userRole;
+        this.items = items;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public void set(User updatedUser) {

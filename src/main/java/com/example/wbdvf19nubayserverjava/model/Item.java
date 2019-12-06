@@ -1,5 +1,7 @@
 package com.example.wbdvf19nubayserverjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.awt.*;
 import java.util.List;
@@ -9,13 +11,13 @@ import java.util.List;
 public class Item {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private String itemId;
+    private Integer itemId;
 
     private String title;
     private String categoryName;
     private String value;
     private String quantity;
-    private String sellerId;
+
     private String conditionString;
     private String description;
     private String refundPolicy;
@@ -29,21 +31,33 @@ public class Item {
 
     private String base64Image;
 
+    @ManyToOne
+    @JsonIgnore
+    private User user;
+
     public Item () {
     }
 
-    public Item(String title, String categoryName, String value, String quantity, String sellerId, String conditionString, String description, String refundPolicy, String paymentOptions, String location, String base64Image) {
+    public Item(String title, String categoryName, String value, String quantity, String conditionString, String description, String refundPolicy, String paymentOptions, String location, String base64Image, User user) {
         this.title = title;
         this.categoryName = categoryName;
         this.value = value;
         this.quantity = quantity;
-        this.sellerId = sellerId;
         this.conditionString = conditionString;
         this.description = description;
         this.refundPolicy = refundPolicy;
         this.paymentOptions = paymentOptions;
         this.location = location;
         this.base64Image = base64Image;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getBase64Image() {
@@ -54,11 +68,11 @@ public class Item {
         this.base64Image = base64Image;
     }
 
-    public String getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
 
-    public void setItemId(String itemId) {
+    public void setItemId(Integer itemId) {
         this.itemId = itemId;
     }
 
@@ -92,14 +106,6 @@ public class Item {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
-    }
-
-    public String getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
     }
 
     public String getConditionString() {

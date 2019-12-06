@@ -19,6 +19,11 @@ public class UserController {
         return userRepository.findById(userId).get();
     }
 
+    @GetMapping("/api/users")
+    public List<User> findAllUsers () {
+        return (List<User>) userRepository.findAll();
+    }
+
 //    @GetMapping("/api/users/{username}")
 //    public List<User> findUserByUsername
 //            (@PathVariable("username") String username) {
