@@ -13,4 +13,8 @@ public interface ItemRepository extends CrudRepository <Item, Integer> {
     @Query(value = "SELECT * FROM items WHERE description LIKE :keyword or title LIKE :keyword",
     nativeQuery = true)
     public List<Item> findItemsByKeyword(@Param("keyword") String keyword);
+
+    @Query(value = "SELECT COUNT(item_id) FROM bookmark_table WHERE item_id = :itemId",
+            nativeQuery = true)
+    public Integer findNumberOfBookmarksByItem(@Param("itemId") Integer itemId);
 }

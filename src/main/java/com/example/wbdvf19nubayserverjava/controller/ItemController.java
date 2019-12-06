@@ -60,4 +60,9 @@ public class ItemController {
         item.set(updatedItem);
         return itemRepository.save(item);
     }
+
+    @GetMapping ("/api/items/{itemId}/bookmarks")
+    public Integer findNumberOfBookmarksByItemId (@PathVariable("itemId") int itemId) {
+        return itemRepository.findNumberOfBookmarksByItem(itemId);
+    }
 }
