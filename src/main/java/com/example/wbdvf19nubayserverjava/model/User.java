@@ -2,6 +2,7 @@ package com.example.wbdvf19nubayserverjava.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name="users")
@@ -22,6 +23,13 @@ public class User {
     @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<ServiceItem> serviceItems;
 
+    @ManyToMany
+    @JoinTable(
+            name = "bookmark_table",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private Set<Item> bookmarkedItems;
+
     public enum typeOfUser {
         BUYER,
         SELLER
@@ -39,6 +47,30 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.userRole = userRole;
         this.items = items;
+    }
+
+    public void addToBookmarks(Item item) {
+        this.bookmarkedItems.add(item);
+    }
+
+    public void removeFromBookmarks(Item item) {
+
+    }
+
+    public List<ServiceItem> getServiceItems() {
+        return serviceItems;
+    }
+
+    public void setServiceItems(List<ServiceItem> serviceItems) {
+        this.serviceItems = serviceItems;
+    }
+
+    public Set<Item> getBookmarkedItems() {
+        return bookmarkedItems;
+    }
+
+    public void setBookmarkedItems(Set<Item> bookmarkedItems) {
+        this.bookmarkedItems = bookmarkedItems;
     }
 
     public List<Item> getItems() {

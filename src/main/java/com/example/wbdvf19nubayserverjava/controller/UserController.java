@@ -1,10 +1,13 @@
 package com.example.wbdvf19nubayserverjava.controller;
 
+import com.example.wbdvf19nubayserverjava.model.Item;
 import com.example.wbdvf19nubayserverjava.model.User;
+import com.example.wbdvf19nubayserverjava.repositories.ItemRepository;
 import com.example.wbdvf19nubayserverjava.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -12,6 +15,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ItemRepository itemRepository;
 
     @GetMapping("/api/users/{userId}")
     public User findUserById
@@ -83,4 +89,23 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    @PostMapping ("/api/users/{userId}/bookmarks/{itemId}")
+    public Integer bookmarkItem(@PathVariable ("userId") Integer userId,
+                            @PathVariable ("itemId") Integer itemId) {
+        User user = userRepository.findById(userId).get();
+        Item item = itemRepository.findById(itemId).get();
+        user.addToBookmarks(item);
+        userRepository.save(user);
+        return 1;
+    }
+
+    @GetMapping ("/api/users/{userId}/bookmarks")
+    public List<Item> getBookmarkedItems(@PathVariable("userId") Integer userId) {
+        List<Integer> itemIdList = userRepository.findBookmarkedItemIdsByUser(userId);
+        List<Item> bookmarkedItemList = new ArrayList<>();
+        for (Integer i : itemIdList) {
+            bookmarkedItemList.add(itemRepository.findById(i).get());
+        }
+        return bookmarkedItemList;
+    }
 }

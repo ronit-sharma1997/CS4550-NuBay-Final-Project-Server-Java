@@ -10,7 +10,7 @@ import java.util.List;
 public interface ItemRepository extends CrudRepository <Item, Integer> {
 
     // Create query for items of a certain keyword
-    @Query(value = "SELECT * FROM cs4550_finalProjSchema.items WHERE description LIKE :keyword or title LIKE :keyword",
+    @Query(value = "SELECT * FROM items WHERE description LIKE :keyword or title LIKE :keyword",
     nativeQuery = true)
     public List<Item> findItemsByKeyword(@Param("keyword") String keyword);
 }

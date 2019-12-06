@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.awt.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name = "items")
@@ -34,6 +35,9 @@ public class Item {
     @ManyToOne
     @JsonIgnore
     private User user;
+
+    @ManyToMany (mappedBy = "bookmarkedItems")
+    private Set<User> bookmarks;
 
     public Item () {
     }
