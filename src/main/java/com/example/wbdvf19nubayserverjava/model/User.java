@@ -19,6 +19,9 @@ public class User {
     @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Item> items;
 
+    @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<ServiceItem> serviceItems;
+
     public enum typeOfUser {
         BUYER,
         SELLER
