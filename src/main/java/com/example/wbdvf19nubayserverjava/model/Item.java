@@ -73,7 +73,7 @@ public class Item {
     public boolean equals(Object obj){
         if (obj instanceof Item) {
             Item itemToTest = (Item) obj;
-            return (itemToTest.getItemId() == this.getItemId());
+            return (itemToTest.getItemId().equals(this.getItemId()));
         } else {
             return false;
         }
