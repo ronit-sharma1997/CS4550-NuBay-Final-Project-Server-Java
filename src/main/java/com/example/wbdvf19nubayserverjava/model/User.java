@@ -1,6 +1,8 @@
 package com.example.wbdvf19nubayserverjava.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +16,8 @@ public class User {
     private String firstName, lastName;
     private String username, password;
     private String email, phoneNumber;
+
+    private String bookmarkedEbayItems;
 
     private typeOfUser userRole;
 
@@ -49,12 +53,57 @@ public class User {
         this.items = items;
     }
 
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, String bookmarkedEbayItems, typeOfUser userRole, List<Item> items, List<ServiceItem> serviceItems, Set<Item> bookmarkedItems) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.bookmarkedEbayItems = bookmarkedEbayItems;
+        this.userRole = userRole;
+        this.items = items;
+        this.serviceItems = serviceItems;
+        this.bookmarkedItems = bookmarkedItems;
+    }
+
+    public void addToBookmarkedEbayItems(String ebayItemId) {
+        if (this.bookmarkedEbayItems == null || this.bookmarkedEbayItems.length() == 0) {
+            this.bookmarkedEbayItems = ebayItemId;
+        }
+        else {
+            this.bookmarkedEbayItems = this.bookmarkedEbayItems.concat("," + ebayItemId);
+        }
+    }
+
+    public void removeFromBookmarkedEbayItems(String ebayItemId) {
+        ArrayList<String> bookmarkedEbayItemsList = new ArrayList<String>(Arrays.asList(this.bookmarkedEbayItems.split(",")));
+        int indexToRemove = -1;
+        for (int i = 0; i < bookmarkedEbayItemsList.size(); i++) {
+            if (bookmarkedEbayItemsList.get(i).equals(ebayItemId)) {
+                indexToRemove = i;
+            }
+        }
+        if (indexToRemove != -1) {
+            bookmarkedEbayItemsList.remove(indexToRemove);
+            this.bookmarkedEbayItems = String.join(",", bookmarkedEbayItemsList);
+        }
+    }
+
     public void addToBookmarks(Item item) {
         this.bookmarkedItems.add(item);
     }
 
     public void removeFromBookmarks(Item item) {
         this.bookmarkedItems.remove(item);
+    }
+
+    public String getBookmarkedEbayItems() {
+        return bookmarkedEbayItems;
+    }
+
+    public void setBookmarkedEbayItems(String bookmarkedEbayItems) {
+        this.bookmarkedEbayItems = bookmarkedEbayItems;
     }
 
     public List<ServiceItem> getServiceItems() {
