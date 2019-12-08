@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -120,5 +121,32 @@ public class UserController {
         user.removeFromBookmarks(item);
         userRepository.save(user);
         return 0;
+    }
+
+    @PostMapping ("/api/users/{userId}/ebaybookmarks/{itemId}")
+    public String addBookmarkedEbayItem
+            (@PathVariable ("userId") Integer userId,
+             @PathVariable ("itemId") String itemId) {
+        User user = userRepository.findById(userId).get();
+        user.addToBookmarkedEbayItems(itemId);
+        userRepository.save(user);
+        return userRepository.findById(userId).get().getBookmarkedEbayItems();
+    }
+
+    @GetMapping ("/api/users/{userId}/ebaybookmarks")
+    public String getEbayBookmarks (@PathVariable ("userId") Integer userId) {
+        User user = userRepository.findById(userId).get();
+        userRepository.save(user);
+        return userRepository.findById(userId).get().getBookmarkedEbayItems();
+    }
+
+    @DeleteMapping ("/api/users/{userId}/ebaybookmarks/{itemId}")
+    public String deleteEbayBookmark
+            (@PathVariable ("userId") Integer userId,
+             @PathVariable ("itemId") String itemId) {
+        User user = userRepository.findById(userId).get();
+        user.removeFromBookmarkedEbayItems(itemId);
+        userRepository.save(user);
+        return userRepository.findById(userId).get().getBookmarkedEbayItems();
     }
 }
