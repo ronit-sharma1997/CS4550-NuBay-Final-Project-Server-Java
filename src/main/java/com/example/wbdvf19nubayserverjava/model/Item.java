@@ -30,7 +30,8 @@ public class Item {
 //    @Basic(fetch = FetchType.LAZY)
 //    private byte[] itemPicture;
 
-    private String base64Image;
+    @Lob
+    private byte[] image1;
 
     @ManyToOne
     @JsonIgnore
@@ -42,7 +43,9 @@ public class Item {
     public Item () {
     }
 
-    public Item(String title, String categoryName, String value, String quantity, String conditionString, String description, String refundPolicy, String paymentOptions, String location, String base64Image, User user) {
+    public Item(String title, String categoryName, String value, String
+            quantity, String conditionString, String description, String refundPolicy,
+                String paymentOptions, String location, byte[] base64Image, User user) {
         this.title = title;
         this.categoryName = categoryName;
         this.value = value;
@@ -52,7 +55,7 @@ public class Item {
         this.refundPolicy = refundPolicy;
         this.paymentOptions = paymentOptions;
         this.location = location;
-        this.base64Image = base64Image;
+        this.image1 = base64Image;
         this.user = user;
     }
 
@@ -66,7 +69,7 @@ public class Item {
         this.refundPolicy = updatedItem.getRefundPolicy();
         this.paymentOptions = updatedItem.getPaymentOptions();
         this.location = updatedItem.getLocation();
-        this.base64Image = updatedItem.getBase64Image();
+        this.image1 = updatedItem.getImage1();
     }
 
     // override equals method
@@ -87,15 +90,15 @@ public class Item {
         this.user = user;
     }
 
-    public String getBase64Image() {
-        return base64Image;
-    }
+  public byte[] getImage1() {
+    return image1;
+  }
 
-    public void setBase64Image(String base64Image) {
-        this.base64Image = base64Image;
-    }
+  public void setImage1(byte[] image1) {
+    this.image1 = image1;
+  }
 
-    public Integer getItemId() {
+  public Integer getItemId() {
         return itemId;
     }
 

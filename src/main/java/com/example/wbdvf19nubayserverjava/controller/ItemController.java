@@ -18,9 +18,9 @@ public class ItemController {
     UserRepository userRepository;
 
     @GetMapping ("/api/items/{itemId}/image")
-    public String findImageByItemId (@PathVariable("itemId") int itemId) {
+    public byte[] findImageByItemId (@PathVariable("itemId") int itemId) {
         Item item = itemRepository.findById(itemId).get();
-        return item.getBase64Image();
+        return item.getImage1();
     }
 
     @GetMapping ("/api/items")
