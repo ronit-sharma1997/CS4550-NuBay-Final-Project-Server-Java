@@ -41,6 +41,11 @@ public class ItemController {
         return itemRepository.save(item);
     }
 
+    @GetMapping("/api/users/{userId}/items")
+    public List<Item> findItemsByUserId(@PathVariable("userId") int userId) {
+        return itemRepository.findByUserid(userId);
+    }
+
     @GetMapping ("/api/searchitems/{keyword}")
     public List<Item> findItemsByKeyword (@PathVariable("keyword") String keyword) {
         keyword = "%" + keyword + "%";

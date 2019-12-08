@@ -17,4 +17,8 @@ public interface ItemRepository extends CrudRepository <Item, Integer> {
     @Query(value = "SELECT COUNT(item_id) FROM bookmark_table WHERE item_id = :itemId",
             nativeQuery = true)
     public Integer findNumberOfBookmarksByItem(@Param("itemId") Integer itemId);
+
+    @Query(value = "SELECT * FROM items where user_id = :userId",
+            nativeQuery = true)
+    public List<Item> findByUserid(@Param("userId") Integer userId);
 }
