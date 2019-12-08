@@ -83,7 +83,7 @@ public class EbayItem {
         this.categoryName = categoryName;
     }
 
-    public List<String> getImageURL() {
+    public List<String> getImageUrl() {
         return this.imageUrl;
     }
 
