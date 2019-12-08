@@ -7,7 +7,7 @@ public class EbayItem {
     private String title;
     private String categoryName;
     private String ebayUrl;
-    private List<String> imageURL;
+    private List<String> imageUrl;
     private String location;
     private String value;
     private String shippingCost;
@@ -19,13 +19,13 @@ public class EbayItem {
     }
 
     public EbayItem(String itemId, String title, String categoryName, String ebayUrl,
-                    List<String> imageURL, String location, String value, String shippingCost,
+                    List<String> imageUrl, String location, String value, String shippingCost,
                     String conditionString, String sellerId) {
         this.itemId = itemId;
         this.title = title;
         this.categoryName = categoryName;
         this.ebayUrl = ebayUrl;
-        this.imageURL = imageURL;
+        this.imageUrl = imageURL;
         this.location = location;
         this.value = value;
         this.shippingCost = shippingCost;
@@ -95,8 +95,8 @@ public class EbayItem {
         return ebayUrl;
     }
 
-    public void setImageURL(List<String> imageURL) {
-        this.imageURL = imageURL;
+    public void setImageUrl(List<String> imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getLocation() {
