@@ -30,7 +30,12 @@ public class Item {
 //    @Basic(fetch = FetchType.LAZY)
 //    private byte[] itemPicture;
 
-    private String base64Image;
+    @Lob
+    private byte[] image1;
+    @Lob
+    private byte[] image2;
+    @Lob
+    private byte[] image3;
 
     @ManyToOne
     @JsonIgnore
@@ -42,7 +47,10 @@ public class Item {
     public Item () {
     }
 
-    public Item(String title, String categoryName, String value, String quantity, String conditionString, String description, String refundPolicy, String paymentOptions, String location, String base64Image, User user) {
+    public Item(String title, String categoryName, String value, String
+            quantity, String conditionString, String description, String refundPolicy,
+                String paymentOptions, String location, byte[] image1, User user, byte[] image2,
+                byte[] image3) {
         this.title = title;
         this.categoryName = categoryName;
         this.value = value;
@@ -52,8 +60,10 @@ public class Item {
         this.refundPolicy = refundPolicy;
         this.paymentOptions = paymentOptions;
         this.location = location;
-        this.base64Image = base64Image;
+        this.image1 = image1;
         this.user = user;
+        this.image2 = image2;
+        this.image3 = image3;
     }
 
     public void set (Item updatedItem) {
@@ -66,7 +76,9 @@ public class Item {
         this.refundPolicy = updatedItem.getRefundPolicy();
         this.paymentOptions = updatedItem.getPaymentOptions();
         this.location = updatedItem.getLocation();
-        this.base64Image = updatedItem.getBase64Image();
+        this.image1 = updatedItem.getImage1();
+        this.image2 = updatedItem.getImage2();
+        this.image3 = updatedItem.getImage3();
     }
 
     // override equals method
@@ -87,15 +99,31 @@ public class Item {
         this.user = user;
     }
 
-    public String getBase64Image() {
-        return base64Image;
-    }
+  public byte[] getImage1() {
+    return image1;
+  }
 
-    public void setBase64Image(String base64Image) {
-        this.base64Image = base64Image;
-    }
+  public byte[] getImage2() {
+    return image2;
+  }
 
-    public Integer getItemId() {
+  public byte[] getImage3() {
+    return image3;
+  }
+
+  public void setImage1(byte[] image1) {
+    this.image1 = image1;
+  }
+
+  public void setImage2(byte[] image2) {
+    this.image2 = image2;
+  }
+
+  public void setImage3(byte[] image3) {
+    this.image3 = image3;
+  }
+
+  public Integer getItemId() {
         return itemId;
     }
 
