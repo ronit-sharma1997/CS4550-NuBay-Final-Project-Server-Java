@@ -60,11 +60,14 @@ public class EbayItemService {
         JsonNode jsonTree = mapper.readTree(httpsGETRequest);
         JsonNode itemTree = jsonTree.path("findItemsByKeywordsResponse").get(0).path("searchResult").get(0).path("item");
         for(JsonNode item : itemTree) {
+            List<String> images = new ArrayList<>();
+            images.add(item.path("galleryURL").get(0).asText());
             String shipping = this.getShippingCostItemTree(item);
             String condition = this.getConditionCostItemTree(item);
             String sellerName = this.getSellerUserName(item);
             response.add(new EbayItem(item.path("itemId").get(0).asText(), item.path("title").get(0).asText(),
-                    item.path("primaryCategory").get(0).path("categoryName").get(0).asText(), item.path("viewItemURL").get(0).asText(), item.path("galleryURL").get(0).asText(),
+                    item.path("primaryCategory").get(0).path("categoryName").get(0).asText(),
+                    item.path("viewItemURL").get(0).asText(), images,
                     item.path("location").get(0).asText(),
                     item.path("sellingStatus").get(0).path("currentPrice").
                             get(0).path("@currencyId").asText() + " " +
