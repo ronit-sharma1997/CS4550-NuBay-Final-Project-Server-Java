@@ -1,9 +1,11 @@
 package com.example.wbdvf19nubayserverjava.controller;
 
+import com.example.wbdvf19nubayserverjava.model.DetailedEbayItem;
 import com.example.wbdvf19nubayserverjava.model.Item;
 import com.example.wbdvf19nubayserverjava.model.User;
 import com.example.wbdvf19nubayserverjava.repositories.ItemRepository;
 import com.example.wbdvf19nubayserverjava.repositories.UserRepository;
+import com.example.wbdvf19nubayserverjava.service.EbayItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,12 @@ public class UserController {
 
     @Autowired
     ItemRepository itemRepository;
+
+    private EbayItemService ebayItemService;
+
+    public UserController() {
+        this.ebayItemService = new EbayItemService();
+    }
 
     @GetMapping("/api/users/{userId}")
     public User findUserById
@@ -134,10 +142,15 @@ public class UserController {
     }
 
     @GetMapping ("/api/users/{userId}/ebaybookmarks")
-    public String getEbayBookmarks (@PathVariable ("userId") Integer userId) {
+    public List<DetailedEbayItem> getEbayBookmarks (@PathVariable ("userId") Integer userId) {
         User user = userRepository.findById(userId).get();
-        userRepository.save(user);
-        return userRepository.findById(userId).get().getBookmarkedEbayItems();
+
+        List<DetailedEbayItem> detailedEbayItemList = new ArrayList<>();
+        ArrayList<String> bookmarkedEbayItemsList = new ArrayList<String>(Arrays.asList(user.getBookmarkedEbayItems().split(",")));
+        for (String ebayItemId : bookmarkedEbayItemsList) {
+            detailedEbayItemList.add(this.ebayItemService.getEbayItemById(ebayItemId));
+        }
+        return detailedEbayItemList;
     }
 
     @DeleteMapping ("/api/users/{userId}/ebaybookmarks/{itemId}")
