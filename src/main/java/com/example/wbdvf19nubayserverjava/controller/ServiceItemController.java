@@ -60,4 +60,9 @@ public class ServiceItemController {
         serviceItem.set(updatedServiceItem);
         return serviceItemRepository.save(serviceItem);
     }
+
+    @GetMapping ("/api/recentserviceitems")
+    public List<ServiceItem> findRecentServiceItems () {
+        return serviceItemRepository.findFiveRecentServiceItems();
+    }
 }

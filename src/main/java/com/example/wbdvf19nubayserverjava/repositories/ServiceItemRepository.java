@@ -13,4 +13,8 @@ public interface ServiceItemRepository extends CrudRepository <ServiceItem, Inte
     @Query(value = "SELECT * FROM serviceitems WHERE description LIKE :keyword or title LIKE :keyword",
             nativeQuery = true)
     public List<ServiceItem> findServiceItemsByKeyword(@Param("keyword") String keyword);
+
+    @Query(value = "SELECT * FROM serviceitems group by id order by id desc limit 5",
+            nativeQuery = true)
+    public List<ServiceItem> findFiveRecentServiceItems();
 }

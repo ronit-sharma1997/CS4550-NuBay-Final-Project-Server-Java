@@ -21,4 +21,8 @@ public interface ItemRepository extends CrudRepository <Item, Integer> {
     @Query(value = "SELECT * FROM items where user_id = :userId",
             nativeQuery = true)
     public List<Item> findByUserid(@Param("userId") Integer userId);
+
+    @Query(value = "SELECT * FROM items group by item_id order by item_id desc limit 5",
+            nativeQuery = true)
+    public List<Item> findFiveRecentItems();
 }

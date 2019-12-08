@@ -70,4 +70,9 @@ public class ItemController {
     public Integer findNumberOfBookmarksByItemId (@PathVariable("itemId") int itemId) {
         return itemRepository.findNumberOfBookmarksByItem(itemId);
     }
+
+    @GetMapping ("/api/recentitems")
+    public List<Item> findRecentItems () {
+        return itemRepository.findFiveRecentItems();
+    }
 }
