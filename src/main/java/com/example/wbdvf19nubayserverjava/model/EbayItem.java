@@ -25,11 +25,11 @@ public class EbayItem {
         this.title = title;
         this.categoryName = categoryName;
         this.ebayUrl = ebayUrl;
-        this.imageUrl = imageURL;
+        this.imageUrl = imageUrl;
         this.location = location;
         this.value = value;
         this.shippingCost = shippingCost;
-        this.conditionString= conditionString;
+        this.conditionString = conditionString;
         this.sellerId = sellerId;
     }
 
@@ -84,7 +84,7 @@ public class EbayItem {
     }
 
     public List<String> getImageURL() {
-        return this.imageURL;
+        return this.imageUrl;
     }
 
     public void setEbayUrl(String ebayUrl) {
