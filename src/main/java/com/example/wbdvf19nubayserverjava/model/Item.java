@@ -115,6 +115,14 @@ public class Item {
     this.image1 = image1;
   }
 
+  public void setImage2(byte[] image2) {
+    this.image2 = image2;
+  }
+
+  public void setImage3(byte[] image3) {
+    this.image3 = image3;
+  }
+
   public Integer getItemId() {
         return itemId;
     }
