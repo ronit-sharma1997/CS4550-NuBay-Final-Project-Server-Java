@@ -1,51 +1,53 @@
 package com.example.wbdvf19nubayserverjava.model;
 
+import java.util.List;
+
 public class EbayItem {
     private String itemId;
     private String title;
     private String categoryName;
-    private String viewItemURL;
-    private String galleryURL;
+    private String ebayUrl;
+    private List<String> imageUrl;
     private String location;
-    private String __value__;
+    private String value;
     private String shippingCost;
-    private String condition;
-    private String sellerName;
+    private String conditionString;
+    private String sellerId;
 
     public EbayItem() {
 
     }
 
-    public EbayItem(String itemId, String title, String categoryName, String viewItemURL,
-                    String galleryURL, String location, String __value__, String shippingCost,
-                    String condition, String sellerName) {
+    public EbayItem(String itemId, String title, String categoryName, String ebayUrl,
+                    List<String> imageUrl, String location, String value, String shippingCost,
+                    String conditionString, String sellerId) {
         this.itemId = itemId;
         this.title = title;
         this.categoryName = categoryName;
-        this.viewItemURL = viewItemURL;
-        this.galleryURL = galleryURL;
+        this.ebayUrl = ebayUrl;
+        this.imageUrl = imageUrl;
         this.location = location;
-        this.__value__ = __value__;
+        this.value = value;
         this.shippingCost = shippingCost;
-        this.condition = condition;
-        this.sellerName = sellerName;
+        this.conditionString = conditionString;
+        this.sellerId = sellerId;
     }
 
 
-    public String getSellerName() {
-        return sellerName;
+  public String getSellerId() {
+    return sellerId;
+  }
+
+  public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
     }
 
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
+    public String getConditionString() {
+        return conditionString;
     }
 
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setConditionString(String conditionString) {
+        this.conditionString = conditionString;
     }
 
     public String getShippingCost() {
@@ -81,20 +83,20 @@ public class EbayItem {
         this.categoryName = categoryName;
     }
 
-    public String getViewItemURL() {
-        return viewItemURL;
+    public List<String> getImageUrl() {
+        return this.imageUrl;
     }
 
-    public void setViewItemURL(String viewItemURL) {
-        this.viewItemURL = viewItemURL;
+    public void setEbayUrl(String ebayUrl) {
+        this.ebayUrl = ebayUrl;
     }
 
-    public String getGalleryURL() {
-        return galleryURL;
+    public String getEbayUrl() {
+        return ebayUrl;
     }
 
-    public void setGalleryURL(String galleryURL) {
-        this.galleryURL = galleryURL;
+    public void setImageUrl(List<String> imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getLocation() {
@@ -105,11 +107,11 @@ public class EbayItem {
         this.location = location;
     }
 
-    public String get__value__() {
-        return __value__;
+    public String getValue() {
+        return value;
     }
 
-    public void set__value__(String __value__) {
-        this.__value__ = __value__;
+    public void setValue(String value) {
+        this.value = value;
     }
 }
