@@ -24,11 +24,9 @@ public class User {
     private typeOfUser userRole;
 
     @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)
-    @JsonIgnore
     private List<Item> items;
 
     @OneToMany (mappedBy = "user", cascade = CascadeType.REMOVE)
-    @JsonIgnore
     private List<ServiceItem> serviceItems;
 
     @ManyToMany
@@ -36,7 +34,6 @@ public class User {
             name = "bookmark_table",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id"))
-    @JsonIgnore
     private Set<Item> bookmarkedItems;
 
     public enum typeOfUser {
