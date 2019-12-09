@@ -75,4 +75,10 @@ public class ItemController {
     public List<Item> findRecentItems () {
         return itemRepository.findFiveRecentItems();
     }
+
+    @GetMapping ("/api/search/items/category/{categoryName}")
+    public List<Item> findItemsByCategory (@PathVariable("categoryName") String categoryName) {
+        categoryName = "%" + categoryName + "%";
+        return itemRepository.findItemsByCategory(categoryName);
+    }
 }

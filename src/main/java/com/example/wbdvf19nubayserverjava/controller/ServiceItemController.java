@@ -65,4 +65,10 @@ public class ServiceItemController {
     public List<ServiceItem> findRecentServiceItems () {
         return serviceItemRepository.findFiveRecentServiceItems();
     }
+
+    @GetMapping ("/api/search/serviceitems/category/{categoryName}")
+    public List<ServiceItem> findServiceItemsByCategory (@PathVariable("categoryName") String categoryName) {
+        categoryName = "%" + categoryName + "%";
+        return serviceItemRepository.findServiceItemsByCategory(categoryName);
+    }
 }
