@@ -15,6 +15,7 @@ public class Item {
     private Integer itemId;
 
     private String title;
+    private String categoryId;
     private String categoryName;
     private String value;
     private String quantity;
@@ -47,11 +48,12 @@ public class Item {
     public Item () {
     }
 
-    public Item(String title, String categoryName, String value, String
+    public Item(String title, String categoryId, String categoryName, String value, String
             quantity, String conditionString, String description, String refundPolicy,
                 String paymentOptions, String location, byte[] image1, User user, byte[] image2,
                 byte[] image3) {
         this.title = title;
+        this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.value = value;
         this.quantity = quantity;
@@ -69,6 +71,7 @@ public class Item {
     public void set (Item updatedItem) {
         this.title = updatedItem.getTitle();
         this.categoryName = updatedItem.getCategoryName();
+        this.categoryId = updatedItem.getCategoryId();
         this.value = updatedItem.getValue();
         this.quantity = updatedItem.getQuantity();
         this.conditionString = updatedItem.getConditionString();
@@ -101,6 +104,14 @@ public class Item {
 
   public byte[] getImage1() {
     return image1;
+  }
+
+  public void setCategoryId(String categoryId) {
+    this.categoryId = categoryId;
+  }
+
+  public String getCategoryId() {
+    return categoryId;
   }
 
   public byte[] getImage2() {

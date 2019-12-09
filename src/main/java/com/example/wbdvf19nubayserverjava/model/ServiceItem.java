@@ -19,7 +19,13 @@ public class ServiceItem {
     private String location;
     private String availability;
 
-    private String base64Image;
+    @Lob
+    private byte[] image1;
+    @Lob
+    private byte[] image2;
+    @Lob
+    private byte[] image3;
+
 
     @ManyToOne
     @JsonIgnore
@@ -28,7 +34,9 @@ public class ServiceItem {
     public ServiceItem () {
     }
 
-    public ServiceItem (String title, String categoryName, String value, String description, String paymentOptions, String location, String availability, String base64Image, User user) {
+    public ServiceItem (String title, String categoryName, String value, String description,
+                        String paymentOptions, String location, String availability,byte[] image1,
+            byte[] image2, byte[] image3,User user) {
         this.title = title;
         this.categoryName = categoryName;
         this.value = value;
@@ -36,7 +44,9 @@ public class ServiceItem {
         this.paymentOptions = paymentOptions;
         this.location = location;
         this.availability = availability;
-        this.base64Image = base64Image;
+        this.image1 = image1;
+        this.image2 = image2;
+        this.image3 = image3;
         this.user = user;
     }
 
@@ -45,10 +55,17 @@ public class ServiceItem {
         this.categoryName = updatedServiceItem.getCategoryName();
         this.value = updatedServiceItem.getValue();
         this.description = updatedServiceItem.getDescription();
+        this.availability = updatedServiceItem.getAvailability();
         this.paymentOptions = updatedServiceItem.getPaymentOptions();
         this.location = updatedServiceItem.getLocation();
-        this.base64Image = updatedServiceItem.getBase64Image();
+        this.image1 = updatedServiceItem.getImage1();
+        this.image2 = updatedServiceItem.getImage2();
+        this.image3 = updatedServiceItem.getImage3();
     }
+
+
+
+
 
     public Integer getId() {
         return id;
@@ -114,12 +131,28 @@ public class ServiceItem {
         this.availability = availability;
     }
 
-    public String getBase64Image() {
-        return base64Image;
+    public byte[] getImage3() {
+        return image3;
     }
 
-    public void setBase64Image(String base64Image) {
-        this.base64Image = base64Image;
+    public byte[] getImage2() {
+        return image2;
+    }
+
+    public byte[] getImage1() {
+        return image1;
+    }
+
+    public void setImage3(byte[] image3) {
+        this.image3 = image3;
+    }
+
+    public void setImage2(byte[] image2) {
+        this.image2 = image2;
+    }
+
+    public void setImage1(byte[] image1) {
+        this.image1 = image1;
     }
 
     public User getUser() {
