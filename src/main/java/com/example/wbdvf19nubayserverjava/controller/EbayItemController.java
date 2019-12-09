@@ -31,6 +31,13 @@ public class EbayItemController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/api/ebayItems/trending")
+    public List<EbayItem> getTrendingItems() {
+        return itemService.getTrendingItems();
+
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/ebayCategories/{categoryId}")
     public List<DetailedEbayItem> findItemsById(@PathVariable("categoryId") String catId) {
         //return new ArrayList<>();

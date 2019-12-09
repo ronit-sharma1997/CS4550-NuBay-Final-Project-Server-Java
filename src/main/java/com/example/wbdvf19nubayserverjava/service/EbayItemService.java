@@ -12,6 +12,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,8 +33,9 @@ public class EbayItemService {
                 "ShippingCosts,TextDescription&appid=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a&" +
                 "itemID=";
         this.categoryApi = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByCategory&SERVICE-VERSION=1.0.0&" +
-                "SECURITY-APPNAME=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a&paginationInput.pageNumber=1" +
-                "&paginationInput.entriesPerPage=15&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD" +
+                "SECURITY-APPNAME=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a&outputSelector(0)=SellerInfo" +
+                "&paginationInput.pageNumber=1" +
+                "&paginationInput.entriesPerPage=12&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD" +
                 "&categoryId=";
     }
 
@@ -44,7 +47,7 @@ public class EbayItemService {
         try {
             this.httpsGETRequest = new URL(this.ebayFindingAPI + keyword.replace(" ",
                     "%20"));
-            parseEbayJSON(response, this.httpsGETRequest);
+            parseEbayJSON(response, this.httpsGETRequest,"findItemsByKeywordsResponse");
         } catch (MalformedURLException m) {
             return response;
         } catch (IOException e) {
@@ -55,25 +58,53 @@ public class EbayItemService {
     }
 
 
-    private void parseEbayJSON(List<EbayItem> response, URL httpsGETRequest) throws IOException {
+    public List<EbayItem> getTrendingItems() {
+      List<EbayItem> response = new ArrayList<>();
+      String[] categoriesToGet = new String[]{"1059","15032","32852", "15273"};
+      for(String category : categoriesToGet) {
+        this.findNonDetailItemsByCategory(response,category);
+
+      }
+      return response;
+
+    }
+
+
+    private void parseEbayJSON(List<EbayItem> response, URL httpsGETRequest, String initialPath)
+            throws IOException {
         ObjectMapper mapper = new ObjectMapper();
+        Set<String> alreadySeenIds = new HashSet<>();
         JsonNode jsonTree = mapper.readTree(httpsGETRequest);
-        JsonNode itemTree = jsonTree.path("findItemsByKeywordsResponse").get(0).path("searchResult").get(0).path("item");
+        JsonNode itemTree = jsonTree.path(initialPath).get(0).path("searchResult").get(0).path("item");
         for(JsonNode item : itemTree) {
             List<String> images = new ArrayList<>();
-            images.add(item.path("galleryURL").get(0).asText());
-            String shipping = this.getShippingCostItemTree(item);
-            String condition = this.getConditionCostItemTree(item);
-            String sellerName = this.getSellerUserName(item);
-            response.add(new EbayItem(item.path("itemId").get(0).asText(), item.path("title").get(0).asText(),
-                    item.path("primaryCategory").get(0).path("categoryName").get(0).asText(),
-                    item.path("viewItemURL").get(0).asText(), images,
-                    item.path("location").get(0).asText(),
-                    item.path("sellingStatus").get(0).path("currentPrice").
-                            get(0).path("@currencyId").asText() + " " +
-                            item.path("sellingStatus").get(0).path("currentPrice").get(0).path("__value__").asText(),
-                    shipping, condition,sellerName));
+            String id = item.path("itemId").get(0).asText();
+            if(!alreadySeenIds.contains(id)) {
+              alreadySeenIds.add(id);
+              images.add(this.getGalleryUrlString(item));
+              String shipping = this.getShippingCostItemTree(item);
+              String condition = this.getConditionCostItemTree(item);
+              String sellerName = this.getSellerUserName(item);
+              response.add(new EbayItem(id, item.path("title").get(0).asText(),
+                      item.path("primaryCategory").get(0).path("categoryName").get(0).asText(),
+                      item.path("viewItemURL").get(0).asText(), images,
+                      item.path("location").get(0).asText(),
+                      item.path("sellingStatus").get(0).path("currentPrice").
+                              get(0).path("@currencyId").asText() + " " +
+                              item.path("sellingStatus").get(0).path("currentPrice").get(0).path("__value__").asText(),
+                      shipping, condition, sellerName));
+            }
+
         }
+    }
+
+    private String getGalleryUrlString(JsonNode item) {
+      try {
+       return item.path("galleryURL").get(0).asText();
+      }
+      catch (Exception e) {
+        return "";
+      }
     }
 
     public void getIdListFromResponse(List<String> allIds, URL httpsGETRequest) throws IOException {
@@ -86,6 +117,22 @@ public class EbayItemService {
             allIds.add(id);
 
         }
+    }
+
+    private void findNonDetailItemsByCategory(List<EbayItem> items,String categoryId) {
+      try {
+        this.httpsGETRequest =
+                new URL(this.categoryApi + categoryId.replace(" ", "%20"));
+        this.parseEbayJSON(items, this.httpsGETRequest,"findItemsByCategoryResponse");
+      }
+      catch (MalformedURLException m) {
+
+      } catch (IOException e) {
+
+      }
+
+
+
     }
     public List<DetailedEbayItem> findAllItemsByCategoryId(String categoryId) {
         List<DetailedEbayItem> response = new ArrayList<>();
@@ -109,7 +156,9 @@ public class EbayItemService {
         return response;
     }
 
-    public DetailedEbayItem getEbayItemById(String id) {
+
+
+  public DetailedEbayItem getEbayItemById(String id) {
         DetailedEbayItem detailedEbayItem = null;
         try {
             this.httpsGETRequest = new URL(this.shoppingApi + id.replace(" ", "%20"));
@@ -228,6 +277,7 @@ public class EbayItemService {
         }
 
     }
+
 
 
 
