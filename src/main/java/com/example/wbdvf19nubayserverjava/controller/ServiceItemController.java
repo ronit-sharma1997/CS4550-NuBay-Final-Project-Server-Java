@@ -18,9 +18,9 @@ public class ServiceItemController {
     UserRepository userRepository;
 
     @GetMapping("/api/serviceitems/{itemId}/image")
-    public String findImageByServiceItemId (@PathVariable("itemId") int itemId) {
+    public byte[] findImageByServiceItemId (@PathVariable("itemId") int itemId) {
         ServiceItem serviceItem = serviceItemRepository.findById(itemId).get();
-        return serviceItem.getBase64Image();
+        return serviceItem.getImage1();
     }
 
     @GetMapping ("/api/serviceitems")
