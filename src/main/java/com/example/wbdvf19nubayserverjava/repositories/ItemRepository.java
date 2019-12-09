@@ -25,4 +25,8 @@ public interface ItemRepository extends CrudRepository <Item, Integer> {
     @Query(value = "SELECT * FROM items group by item_id order by item_id desc limit 5",
             nativeQuery = true)
     public List<Item> findFiveRecentItems();
+
+    @Query(value = "SELECT * FROM items WHERE category_name LIKE :categoryName",
+            nativeQuery = true)
+    public List<Item> findItemsByCategory(@Param("categoryName") String categoryName);
 }

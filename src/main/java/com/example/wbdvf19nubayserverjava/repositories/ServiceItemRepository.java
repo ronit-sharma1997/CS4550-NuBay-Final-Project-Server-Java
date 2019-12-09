@@ -17,4 +17,8 @@ public interface ServiceItemRepository extends CrudRepository <ServiceItem, Inte
     @Query(value = "SELECT * FROM serviceitems group by id order by id desc limit 5",
             nativeQuery = true)
     public List<ServiceItem> findFiveRecentServiceItems();
+
+    @Query(value = "SELECT * FROM serviceitems WHERE category_name LIKE :categoryName",
+            nativeQuery = true)
+    public List<ServiceItem> findServiceItemsByCategory(@Param("categoryName") String categoryName);
 }

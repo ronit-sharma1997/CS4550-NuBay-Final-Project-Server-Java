@@ -38,6 +38,7 @@ public class ItemController {
             (@PathVariable("userId") int userId,
              @RequestBody Item item) {
         item.setUser(userRepository.findById(userId).get());
+        item.setSeller_id(userRepository.findById(userId).get().getId());
         return itemRepository.save(item);
     }
 
@@ -74,5 +75,11 @@ public class ItemController {
     @GetMapping ("/api/recentitems")
     public List<Item> findRecentItems () {
         return itemRepository.findFiveRecentItems();
+    }
+
+    @GetMapping ("/api/search/items/category/{categoryName}")
+    public List<Item> findItemsByCategory (@PathVariable("categoryName") String categoryName) {
+        categoryName = "%" + categoryName + "%";
+        return itemRepository.findItemsByCategory(categoryName);
     }
 }
