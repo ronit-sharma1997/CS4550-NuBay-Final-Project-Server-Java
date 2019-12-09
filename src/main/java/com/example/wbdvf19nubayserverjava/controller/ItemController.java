@@ -1,6 +1,7 @@
 package com.example.wbdvf19nubayserverjava.controller;
 
 import com.example.wbdvf19nubayserverjava.model.Item;
+import com.example.wbdvf19nubayserverjava.model.User;
 import com.example.wbdvf19nubayserverjava.repositories.ItemRepository;
 import com.example.wbdvf19nubayserverjava.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,10 @@ public class ItemController {
     public Item createItem
             (@PathVariable("userId") int userId,
              @RequestBody Item item) {
-        item.setUser(userRepository.findById(userId).get());
-        item.setSeller_id(userRepository.findById(userId).get().getId());
+        User u = userRepository.findById(userId).get();
+        item.setUser(u);
+        item.setSeller_id(u.getId());
+        item.setSeller_name(u.getUsername());
         return itemRepository.save(item);
     }
 

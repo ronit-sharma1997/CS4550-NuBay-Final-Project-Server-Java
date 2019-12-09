@@ -1,6 +1,7 @@
 package com.example.wbdvf19nubayserverjava.controller;
 
 import com.example.wbdvf19nubayserverjava.model.ServiceItem;
+import com.example.wbdvf19nubayserverjava.model.User;
 import com.example.wbdvf19nubayserverjava.repositories.ServiceItemRepository;
 import com.example.wbdvf19nubayserverjava.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,11 @@ public class ServiceItemController {
     public ServiceItem createServiceItem
             (@PathVariable("userId") int userId,
              @RequestBody ServiceItem serviceItem) {
-        serviceItem.setUser(userRepository.findById(userId).get());
+        User u = userRepository.findById(userId).get();
+        serviceItem.setUser(u);
+        serviceItem.setUser(u);
+        serviceItem.setSeller_id(u.getId());
+        serviceItem.setSeller_name(u.getUsername());
         return serviceItemRepository.save(serviceItem);
     }
 

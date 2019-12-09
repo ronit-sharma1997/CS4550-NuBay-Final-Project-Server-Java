@@ -27,6 +27,7 @@ public class Item {
     private String location;
 
     private Integer seller_id;
+    private String seller_name;
     private int numBookmarks = 0;
 
     // handle image
@@ -94,6 +95,14 @@ public class Item {
 
     public void setNumBookmarks(int numBookmarks) {
         this.numBookmarks = numBookmarks;
+    }
+
+    public String getSeller_name() {
+        return seller_name;
+    }
+
+    public void setSeller_name(String seller_name) {
+        this.seller_name = seller_name;
     }
 
     // override equals method

@@ -19,6 +19,9 @@ public class ServiceItem {
     private String location;
     private String availability;
 
+    private Integer seller_id;
+    private String seller_name;
+
     @Lob
     private byte[] image1;
     @Lob
@@ -63,9 +66,21 @@ public class ServiceItem {
         this.image3 = updatedServiceItem.getImage3();
     }
 
+    public Integer getSeller_id() {
+        return seller_id;
+    }
 
+    public void setSeller_id(Integer seller_id) {
+        this.seller_id = seller_id;
+    }
 
+    public String getSeller_name() {
+        return seller_name;
+    }
 
+    public void setSeller_name(String seller_name) {
+        this.seller_name = seller_name;
+    }
 
     public Integer getId() {
         return id;
