@@ -26,6 +26,8 @@ public class Item {
     private String paymentOptions;
     private String location;
 
+    private Integer seller_id;
+
     // handle image
 //    @Lob
 //    @Basic(fetch = FetchType.LAZY)
@@ -43,6 +45,7 @@ public class Item {
     private User user;
 
     @ManyToMany (mappedBy = "bookmarkedItems")
+    @JsonIgnore
     private Set<User> bookmarks;
 
     public Item () {
@@ -92,6 +95,22 @@ public class Item {
         } else {
             return false;
         }
+    }
+
+    public Integer getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(Integer seller_id) {
+        this.seller_id = seller_id;
+    }
+
+    public Set<User> getBookmarks() {
+        return bookmarks;
+    }
+
+    public void setBookmarks(Set<User> bookmarks) {
+        this.bookmarks = bookmarks;
     }
 
     public User getUser() {

@@ -38,6 +38,7 @@ public class ItemController {
             (@PathVariable("userId") int userId,
              @RequestBody Item item) {
         item.setUser(userRepository.findById(userId).get());
+        item.setSeller_id(userRepository.findById(userId).get().getId());
         return itemRepository.save(item);
     }
 
