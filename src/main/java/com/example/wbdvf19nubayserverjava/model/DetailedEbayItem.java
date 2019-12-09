@@ -17,7 +17,7 @@ public class DetailedEbayItem {
   private String conditionString;
   private String description;
   private String refundPolicy;
-  private List<String> paymentOptions;
+  private String paymentOptions;
   private String location;
 
 public DetailedEbayItem() {
@@ -27,7 +27,7 @@ public DetailedEbayItem() {
 public DetailedEbayItem(String itemId, String title, String categoryName, String categoryId, List<String>
         imageUrl,String value, String quanity, String shippingCost, String ebayUrl,
                         String sellerId, String sellerRating, String condition, String description,
-                        String refundPolicy, List<String> paymentOptions, String location) {
+                        String refundPolicy, String paymentOptions, String location) {
       this.itemId = itemId;
       this.title = title;
       this.categoryName = categoryName;
@@ -47,7 +47,7 @@ public DetailedEbayItem(String itemId, String title, String categoryName, String
 }
 
 
-  public List<String> getPaymentOptions() {
+  public String getPaymentOptions() {
     return paymentOptions;
   }
 
@@ -55,7 +55,7 @@ public DetailedEbayItem(String itemId, String title, String categoryName, String
     this.location = location;
   }
 
-  public void setPaymentOptions(List<String> paymentOptions) {
+  public void setPaymentOptions(String paymentOptions) {
     this.paymentOptions = paymentOptions;
   }
 
