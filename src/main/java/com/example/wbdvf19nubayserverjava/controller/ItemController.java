@@ -6,6 +6,7 @@ import com.example.wbdvf19nubayserverjava.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -69,7 +70,8 @@ public class ItemController {
 
     @GetMapping ("/api/items/{itemId}/bookmarks")
     public Integer findNumberOfBookmarksByItemId (@PathVariable("itemId") int itemId) {
-        return itemRepository.findNumberOfBookmarksByItem(itemId);
+//        return itemRepository.findNumberOfBookmarksByItem(itemId);
+        return itemRepository.findById(itemId).get().getBookmarks().size();
     }
 
     @GetMapping ("/api/recentitems")
@@ -81,5 +83,17 @@ public class ItemController {
     public List<Item> findItemsByCategory (@PathVariable("categoryName") String categoryName) {
         categoryName = "%" + categoryName + "%";
         return itemRepository.findItemsByCategory(categoryName);
+    }
+
+    @GetMapping ("/api/hotitems")
+    public List<Item> findMostBookmarkedItems () {
+        List <Integer> list = itemRepository.findMostBookmarkedItems();
+        List<Item> itemList = new ArrayList<>();
+        for (Integer i: list) {
+            Item item = itemRepository.findById(i).get();
+            item.setNumBookmarks(item.getBookmarks().size());
+            itemList.add(item);
+        }
+        return itemList;
     }
 }

@@ -29,4 +29,8 @@ public interface ItemRepository extends CrudRepository <Item, Integer> {
     @Query(value = "SELECT * FROM items WHERE category_name LIKE :categoryName",
             nativeQuery = true)
     public List<Item> findItemsByCategory(@Param("categoryName") String categoryName);
+
+    @Query(value = "SELECT item_id FROM bookmark_table GROUP BY item_id ORDER BY COUNT(item_id) desc limit 10",
+            nativeQuery = true)
+    public List<Integer> findMostBookmarkedItems();
 }
