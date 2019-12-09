@@ -119,6 +119,20 @@ public class UserController {
         return bookmarkedItemList;
     }
 
+    @GetMapping ("/api/users/{userId}/recentbookmarks")
+    public List<Item> getRecentBookmarkedItems(@PathVariable("userId") Integer userId) {
+        List<Integer> itemIdList = userRepository.findBookmarkedItemIdsByUser(userId);
+        List<Item> bookmarkedItemList = new ArrayList<>();
+        for (Integer i : itemIdList) {
+            bookmarkedItemList.add(itemRepository.findById(i).get());
+            // return only 5 bookmarks
+            if (bookmarkedItemList.size() == 5) {
+                break;
+            }
+        }
+        return bookmarkedItemList;
+    }
+
     // Return 0 if success
     @DeleteMapping ("/api/users/{userId}/bookmarks/{itemId}")
     public Integer deleteBookmarkedItem(@PathVariable ("userId") Integer userId,
