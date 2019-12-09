@@ -180,13 +180,24 @@ public class EbayItemService {
 
     }
 
-    private List<String> getPaymentOptions(JsonNode itemTree) {
-        List<String> paymentMethods = new ArrayList<>();
+    private String getPaymentOptions(JsonNode itemTree) {
+        String paymentMethods = "";
 
         try {
             JsonNode j = itemTree.path("PaymentMethods");
+            j.size();
             for(JsonNode payment : j) {
-                paymentMethods.add(payment.asText());
+            for(int i = 0; i < j.size(); i ++) {
+              JsonNode currPayment = j.get(i);
+              if(i == j.size() - 1) {
+                paymentMethods += (payment.asText());
+              }
+              else {
+                paymentMethods += (payment.asText());
+                paymentMethods += ",";
+              }
+            }
+
             }
             return paymentMethods;
         }
@@ -226,7 +237,7 @@ public class EbayItemService {
         JsonNode itemTree = jsonTree.path("Item");
         String mainDescription = this.parseTextDesctiption(itemTree);
         String refundPolicy = this.getRefundPolicy(itemTree);
-        List<String> paymentMethods = this.getPaymentOptions(itemTree);
+        String paymentMethods = this.getPaymentOptions(itemTree);
         String location = this.getLocation(itemTree);
         return new DetailedEbayItem(this.findPathNonArray(itemTree,"ItemID"),
                 this.findPathNonArray(itemTree,"Title"),
