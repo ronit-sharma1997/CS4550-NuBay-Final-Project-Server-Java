@@ -28,7 +28,7 @@ public class EbayItemService {
                 "findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a" +
                 "&RESPONSE-DATA-FORMAT=JSON&paginationInput.pageNumber=1&outputSelector(0)=SellerInfo&paginationInput.entriesPerPage=50&REST-PAYLOAD&keywords=";
 
-        this.shoppingApi = "http://open.api.ebay.com/shopping?callname=GetSingleItem&" +
+        this.shoppingApi = "https://open.api.ebay.com/shopping?callname=GetSingleItem&" +
                 "responseencoding=JSON&version=967&IncludeSelector=details," +
                 "ShippingCosts,TextDescription&appid=RonitSha-NuBay-PRD-4b31d5c2d-dcfa3e9a&" +
                 "itemID=";
